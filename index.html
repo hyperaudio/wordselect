@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>Select.js</title>
+
+<script type="text/javascript" src="wordselect.js"></script>
+
+<script type="text/javascript">
+
+var textSelect;
+
+function loaded () {
+	textSelect = new WordSelect('#text', {
+		addHelpers: true,
+		mouseEvents: true,
+		onDragStart: function () { console.log('start'); }
+	});
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+</script>
+
+<style type="text/css">
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body,ul,li {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+ul,li {
+	list-style: none;
+}
+
+body {
+	font-size: 12px;
+	font-family: 'helvetica neue', arial;
+}
+
+#wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#text {
+	position: absolute;
+	left: 0;
+	padding: 2em;
+	line-height: 2em;
+	font-size: 1.5em;
+	width: 100%;
+}
+
+#text a {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+}
+
+.selected {
+	background: #cee;
+	text-shadow: 0 1px 0 #fff;
+}
+
+#text a.last {
+	z-index: 2;
+}
+
+#text a.first:before {
+	content: '⇿';
+	color: #8aa;
+	font-size: 1.2em;
+	text-align: center;
+	line-height: 22px;
+	position: absolute;
+	width: 28px;
+	height: 24px;
+	background: #cee;
+	left: -2px;
+	top: -26px;
+	border-width: 2px 2px 0 2px;
+	border-color: #cee #fff #fff #fff;
+	border-style: solid;
+	text-shadow: 0 1px 0 #fff;
+}
+
+#text a.last:after {
+	content: '⇿';
+	color: #8aa;
+	font-size: 1.2em;
+	text-align: center;
+	line-height: 22px;
+	position: absolute;
+	width: 28px;
+	height: 24px;
+	background: #cee;
+	right: -2px;
+	bottom: -26px;
+	border-width: 0 2px 2px 2px;
+	border-color: #cee #fff #fff #fff;
+	border-style: solid;
+	text-shadow: 0 1px 0 #fff;
+}
+
+#draggable {
+	opacity: 0.8;
+	position: absolute;
+	z-index: 1000;
+	width: 30%;
+	max-height: 4.9em;
+	overflow: hidden;
+	background: #cee;
+	border: 1px solid #fff;
+	padding: 6px 10px;
+	line-height: 1.4em;
+	font-size: 1.3em;
+	pointer-events: none;
+}
+
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+}
+
+</style>
+</head>
+<body onload="loaded()">
+
+<div id="wrapper">
+	<pre id="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</pre>
+</div>
+
+</body>
+</html>
