@@ -1,7 +1,7 @@
 var WordSelect = (function (window, document) {
 
 	function addTagHelpers (el) {
-		var text = el.innerText.split(' ');
+		var text = (el.innerText || el.textContent).split(' ');
 
 		el.innerHTML = '<a>' + text.join(' </a><a>') + '</a>';
 	}
