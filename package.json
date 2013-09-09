@@ -1,0 +1,15 @@
+{
+  "name": "wordselect",
+  "description": "Custom word select widget for mobile and desktop",
+  "version": "0.1",
+  "homepage": "http://hyperaud.io",
+  "author": "Matteo Spinelli <matteo@cubiq.org> (http://cubiq.org)",
+  "keywords": [
+    "text",
+    "selection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperaudio-dev/wordselect"
+  }
+}

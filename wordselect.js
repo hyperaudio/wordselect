@@ -187,11 +187,30 @@ var WordSelect = (function (window, document) {
 	WordSelect.prototype.end = function (e) {
 		clearTimeout(this.dragTimeout);
 
+		if ( this.options.touch ) {
+			this.element.removeEventListener('touchmove', this, false);
+			this.element.removeEventListener('touchend', this, false);
+		}
+
+		if ( this.options.mouse ) {
+			this.element.removeEventListener('mousemove', this, false);
+			this.element.removeEventListener('mouseup', this, false);
+		}
+
+		if ( !this.selectStarted ) {
+			return;
+		}
+
 		var start = Math.min(this.startPosition, this.endPosition),
 			end = Math.max(this.startPosition, this.endPosition);
 
 		addClass(this.words[start], 'first');
 		addClass(this.words[end], 'last');
+	};
+
+	WordSelect.prototype.clearSelection = function () {
+		removeClass(this.element.querySelector('.first'), 'first');
+		removeClass(this.element.querySelector('.last'), 'last');
 
 		if ( this.options.touch ) {
 			this.element.removeEventListener('touchmove', this, false);
@@ -202,16 +221,21 @@ var WordSelect = (function (window, document) {
 			this.element.removeEventListener('mousemove', this, false);
 			this.element.removeEventListener('mouseup', this, false);
 		}
-	};
-
-	WordSelect.prototype.clearSelection = function () {
-		removeClass(this.element.querySelector('.first'), 'first');
-		removeClass(this.element.querySelector('.last'), 'last');
 
 		var selected = this.element.querySelectorAll('.selected');
 		for ( var i = 0, l = selected.length; i < l; i++ ) {
 			removeClass(selected[i], 'selected');
 		}
+	};
+
+	WordSelect.prototype.getSelection = function () {
+		var selected = this.element.querySelectorAll('.selected');
+		var html = '';
+		for ( var i = 0, l = selected.length; i < l; i++ ) {
+			html += selected[i].innerHTML;
+		}
+
+		return html;
 	};
 
 	WordSelect.prototype.dragStart = function (e) {
@@ -230,7 +254,7 @@ var WordSelect = (function (window, document) {
 		var point = e.changedTouches ? e.changedTouches[0] : e;
 
 		if ( this.options.onDragStart ) {
-			this.options.onDragStart.call(this);
+			this.options.onDragStart.call(this, e);
 		}
 	};
 
