@@ -11,7 +11,7 @@ var WordSelect = (function (window, document) {
 
 		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
 		return re.test(e.className);
-	};
+	}
 
 	function addClass (e, c) {
 		if ( hasClass(e, c) ) {
@@ -21,16 +21,16 @@ var WordSelect = (function (window, document) {
 		var newclass = e.className.split(' ');
 		newclass.push(c);
 		e.className = newclass.join(' ');
-	};
+	}
 
-	 function removeClass (e, c) {
+	function removeClass (e, c) {
 		if ( !hasClass(e, c) ) {
 			return;
 		}
 
 		var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
 		e.className = e.className.replace(re, ' ');
-	};
+	}
 
 	function WordSelect (el, options) {
 		this.element = document.querySelector(el);
@@ -63,6 +63,7 @@ var WordSelect = (function (window, document) {
 	}
 
 	WordSelect.prototype.handleEvent = function (e) {
+		// jshint -W086
 		switch (e.type) {
 			case 'mousedown':
 				if ( e.which !== 1 ) {
@@ -80,6 +81,7 @@ var WordSelect = (function (window, document) {
 				this.end(e);
 				break;
 		}
+		// jshint +W086
 	};
 
 	WordSelect.prototype.start = function (e) {
@@ -266,7 +268,7 @@ var WordSelect = (function (window, document) {
 		this.element.removeEventListener('mousedown', this, false);
 		this.element.removeEventListener('mousemove', this, false);
 		this.element.removeEventListener('mouseup', this, false);
-	}
+	};
 
 	return WordSelect;
 
