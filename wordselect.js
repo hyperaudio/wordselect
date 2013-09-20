@@ -234,7 +234,7 @@ var WordSelect = (function (window, document) {
 		var selected = this.element.querySelectorAll('.selected');
 		var html = '';
 		for ( var i = 0, l = selected.length; i < l; i++ ) {
-			html += selected[i].innerHTML;
+			html += selected[i].outerHTML;
 		}
 
 		return html;
