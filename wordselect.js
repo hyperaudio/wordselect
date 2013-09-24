@@ -234,7 +234,7 @@ var WordSelect = (function (window, document) {
 		var selected = this.element.querySelectorAll('.selected');
 		var html = '';
 		for ( var i = 0, l = selected.length; i < l; i++ ) {
-			html += selected[i].outerHTML;
+			html += selected[i].outerHTML.replace(/ class="[\d\w\s\-]*\s?"/gi, ' ');
 		}
 
 		return html;
