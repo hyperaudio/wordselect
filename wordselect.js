@@ -112,7 +112,7 @@ var WordSelect = (function (window, document) {
 		var target = e.target,
 			tmp;
 
-		if ( target == this.element ) {
+		if ( target == this.element || target.tagName != 'A' ) {
 			return;
 		}
 
@@ -164,7 +164,11 @@ var WordSelect = (function (window, document) {
 			return;
 		}
 
-		if ( target == this.element || target == this.currentWord ) {
+		if ( target.tagName == 'P' ) {
+			target = target.querySelector('a:last-child');
+		}
+
+		if ( target == this.element || target == this.currentWord || target.tagName != 'A' ) {
 			return;
 		}
 
@@ -200,6 +204,10 @@ var WordSelect = (function (window, document) {
 		}
 
 		if ( !this.selectStarted ) {
+			if ( e.target == this.element ) {
+				this.clearSelection();
+			}
+
 			return;
 		}
 
@@ -211,6 +219,10 @@ var WordSelect = (function (window, document) {
 	};
 
 	WordSelect.prototype.clearSelection = function () {
+		this.currentWord = null;
+		this.startPosition = null;
+		this.endPosition = null;
+
 		removeClass(this.element.querySelector('.first'), 'first');
 		removeClass(this.element.querySelector('.last'), 'last');
 
@@ -232,9 +244,18 @@ var WordSelect = (function (window, document) {
 
 	WordSelect.prototype.getSelection = function () {
 		var selected = this.element.querySelectorAll('.selected');
+		var prevParent;
 		var html = '';
 		for ( var i = 0, l = selected.length; i < l; i++ ) {
+			if ( selected[i].parentNode !== prevParent ) {
+				prevParent = selected[i].parentNode;
+				html += ( i === 0 ? '<p>' : '</p><p>' );
+			}
 			html += selected[i].outerHTML.replace(/ class="[\d\w\s\-]*\s?"/gi, ' ');
+		}
+
+		if ( html ) {
+			html += '</p>';
 		}
 
 		return html;
