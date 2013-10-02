@@ -95,12 +95,12 @@ var WordSelect = (function (window, document) {
 
 		if ( this.options.mouse ) {
 			this.element.addEventListener('mousemove', this, false);
-			this.element.addEventListener('mouseup', this, false);
+			window.addEventListener('mouseup', this, false);
 		}
 
 		if ( this.options.touch ) {
 			this.element.addEventListener('touchmove', this, false);
-			this.element.addEventListener('touchend', this, false);
+			window.addEventListener('touchend', this, false);
 		}
 
 		if ( hasClass(e.target, 'selected') ) {

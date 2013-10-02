@@ -1,7 +1,7 @@
 {
   "name": "wordselect",
   "description": "Custom word select widget for mobile and desktop",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "http://hyperaud.io",
   "author": "Matteo Spinelli <matteo@cubiq.org> (http://cubiq.org)",
   "keywords": [
